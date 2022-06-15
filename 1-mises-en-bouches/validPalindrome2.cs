@@ -1,27 +1,26 @@
-public class Solution {
-    
-    public bool ValidPalindrome(string s) {
-        if (isPalindrome(s)) return true;
-        
-        for (int i = 0; i < s.Length; i++)
-        {
-            string copy = s.Clone();
-            string reducedString = copy.Remove(i);
-            return isPalindrome(reducedString);
-        }
-    }
+public class Solution
+{
 
-    private bool isPalindrome(string s)
+	public bool ValidPalindrome(string s)
 	{
-        char[] charArray = s.ToCharArray();
-        Array.Reverse(charArray);
-        string reversed = new string(charArray);
+		if (isPalindrome(s)) return true;
 
-        return s.Equals(reversed);
-    }
+		for (int i = 0; i < s.Length; i++)
+		{
+			string copy = (string)s.Clone();
+			string reducedString = copy.Remove(i, 1);
+			if (isPalindrome(reducedString))
+				return true;
+		}
+		return false;
+	}
 
-    static void Main()
-    {
-        bool valid = ValidPalindrome("abca");
-    }
+	private bool isPalindrome(string s)
+	{
+		char[] charArray = s.ToCharArray();
+		Array.Reverse(charArray);
+		string reversed = new string(charArray);
+
+		return s.Equals(reversed);
+	}
 }
