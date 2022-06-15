@@ -5,5 +5,20 @@
  * @return {string[]}
  */
 const findMissingRanges = (nums, lower, upper) => {
-    
+	ranges = [];
+	lastChecked = lower - 1;
+
+	for (index = 0; index <= nums.length; ++index) {
+		currentValue = index == nums.length ? upper + 1 : nums[index];
+
+		if (currentValue - lastChecked > 1) {
+			ranges.push(
+				lastChecked + 1 != currentValue - 1
+					? `${lastChecked + 1}->${currentValue - 1}`
+					: `${currentValue - 1}`
+			);
+		}
+		lastChecked = currentValue;
+	}
+	console.log(ranges);
 };
